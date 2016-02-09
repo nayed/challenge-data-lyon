@@ -6,11 +6,17 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Javascript;
 
 class RechercheController extends Controller
 {
     public function index()
 	{
+		Javascript::put([
+	        'foo' => 'bar',
+	        'age' => 29
+	    ]);
+
 		return view('recherche');
 	}
 

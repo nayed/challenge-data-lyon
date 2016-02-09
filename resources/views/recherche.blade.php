@@ -7,8 +7,9 @@
 
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript">
-            /*function initialize(longlat, description) {
-
+        console.log(age)
+            function initialize(longlat, description) {
+              
                 var myOptions = {
                     center: new google.maps.LatLng(45.750000,4.850000),
                     zoom: 11,
