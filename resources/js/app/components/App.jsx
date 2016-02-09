@@ -13,18 +13,18 @@ export default class App extends React.Component {
 
     showResults(response) {
         let searchResults = this.state.searchResults
-        searchResults.push(response.results)
-        
+        searchResults.push(response.features)
+        //console.log(response)
         this.setState({searchResults: searchResults})
     }
 
     search(URL) {
         $.ajax({
             type: "GET",
-            dataType: 'jsonp',
+            dataType: 'json',
             url: URL,
             success: function(response) {
-                console.log(this)
+                //console.log(response)
                 this.showResults(response)
             }.bind(this),
             error: function(xhr, status, err) {
@@ -33,16 +33,15 @@ export default class App extends React.Component {
         })
     }
 
-    /*componentDidMount() {
-        //this.search('https://itunes.apple.com/search?term=fun')
-    }*/
+    componentDidMount() {
+        this.search('https://download.data.grandlyon.com/wfs/grandlyon?SERVICE=WFS&VERSION=2.0.0&outputformat=GEOJSON&maxfeatures=30&request=GetFeature&typename=gin_nettoiement.ginmarche&SRSNAME=urn:ogc:def:crs:EPSG::4171')
+    }
     
     render() {
-        
+        console.log(this.state)
         return (
             <div>
-                <SearchBox search={this.search.bind(this)} />
-                <Results searchResults={this.state.searchResults} />
+                
             </div>
         )
     }
