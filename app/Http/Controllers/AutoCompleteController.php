@@ -43,8 +43,8 @@ class AutoCompleteController extends Controller
     }
 
     // debug mode
-    dump($arrayTown);
-    die;
+    /*dump($arrayTown);
+    die;*/
 
     return array("datas" => $arrayTown);
   }
