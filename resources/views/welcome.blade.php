@@ -34,10 +34,13 @@
                 font-size: 96px;
             }
         </style>
+
     </head>
-    <body>
+    
+    <body onload="initialize('45.766522590766,4.8992504150412 | 45.744016572944332,4.918889800755741')">
         <div class="container">
             <div class="content">
+
                 <div class="title">Challenge Data Lyon</div>
             </div>
         </div>
