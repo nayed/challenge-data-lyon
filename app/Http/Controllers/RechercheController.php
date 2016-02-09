@@ -14,13 +14,23 @@ class RechercheController extends Controller
 		return view('recherche');
 	}
 
-	/*public function rechercher()
+	public function rechercher()
 	{
-		if(isset($_POST[]))
+		if(isset($_POST['jours']) || isset($_POST['ville']))
 		{
-			return view('recherche')->with('jour', $n);
+			
+			$jour=$_POST['jours'];
+			$ville=$_POST['ville'];
+
+			$return[0]=$jour;
+			$return[1]=$ville;
+			
+			return view('recherche')->with('return', $return);
 		}
 		else
-			$erreur = "Veuillez sélectionner un jour de marché";
-	}*/
+		{
+			$erreur = "Veuillez sélectionner un jour ou une ville de marché";
+			return view('recherche')->with('erreur', $erreur);
+		}
+	}
 }

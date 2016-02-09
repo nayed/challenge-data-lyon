@@ -16,6 +16,8 @@ Route::get('/', function () {
 });
 
 Route::get('/recherche', 'RechercheController@index');
+Route::post('/recherche/rechercher', 'RechercheController@rechercher');
+//Route::post('/recherche/rechercher', ['uses' => 'RechercheController@rechercher', 'as' => 'home']);
 
 /*
 |--------------------------------------------------------------------------
