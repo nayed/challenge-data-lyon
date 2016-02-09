@@ -7,40 +7,51 @@
 
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript">
-            function initialize(longlat) {
+            function initialize(longlat, description) {
 
                 var myOptions = {
                     center: new google.maps.LatLng(45.750000,4.850000),
-                    zoom: 10,
+                    zoom: 11,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
 
                 var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
-                tab=longlat.split('|');
+                if(longlat!='')
+                {
 
-                for (i = 0; i < tab.length; i++) { 
+                    tab=longlat.split('|');
 
-                    longitude=tab[i].split(",")[0];
-                    latitude=tab[i].split(",")[1];
-                 
-                    var myLatlng=new google.maps.LatLng(longitude,latitude);
-                    var marker = new google.maps.Marker({
-                        position: myLatlng,
-                        map: map,
-                        //title:"IUT Fontainebleau",
-                        draggable:true,
-                        animation: google.maps.Animation.DROP
-                    });
-                    
-                    /*
-                    marker.info = new google.maps.InfoWindow({
-                        content: 'Licence Bdise <br/><img src="http://upload.wikimedia.org/wikipedia/fr/thumb/b/ba/UPEC-logo.svg/443px-UPEC-logo.svg.png" height="30px">'
-                    });*/
-                    /*
-                    google.maps.event.addListener(marker, 'click', function(){
-                        marker.info.open(map, marker);
-                    });*/
+                    if(description != '')
+                        tab2=description.split('|');
+
+
+                    for (i = 0; i < tab.length; i++) { 
+
+                        longitude=tab[i].split(",")[0];
+                        latitude=tab[i].split(",")[1];
+                     
+                        var myLatlng=new google.maps.LatLng(longitude,latitude);
+                        
+                        window['marker'+i] = new google.maps.Marker({
+                            position: myLatlng,
+                            map: map,
+                            animation: google.maps.Animation.DROP
+                          });
+                        
+                        var infowindow = new google.maps.InfoWindow({
+                            content: tab2[i]
+                        });
+
+                        /*google.maps.event.addListener(window['marker'+i], 'click', function(){
+                            infowindow.open(map,window['marker'+i]);
+                        });*/
+
+
+                        infowindow.open(map,window['marker'+i]);
+                        
+                        
+                    }
                 }
             }
         </script>
@@ -75,14 +86,38 @@
             }
 
             .title {
+                text-align: center;
                 font-size: 96px;
             }
         </style>
 
     </head>
+
+
+    <?php   
+       
+
+       if(isset($return))
+       {
+            //$json = file_get_contents("https://download.data.grandlyon.com/wfs/grandlyon?SERVICE=WFS&VERSION=2.0.0&outputformat=GEOJSON&request=GetFeature&typename=gin_nettoiement.ginmarche&SRSNAME=urn:ogc:def:crs:EPSG::4171");
+            //$parsed_json = json_decode($json);
+
+            $longlat='45.766522590766,4.8992504150412 | 45.744016572944332,4.918889800755741';
+            $description='<b>VILLEURBANNE \/ Place Victor Balland</b><br/><p>lundi: X<br/> mardi : X<br/> mercredi : Matin - Alimentaire<br/> jeudi : X<br/> vendredi : X<br/> samedi : Matin - Alimentaire<br/> dimanche : X <br/> Longitude, Latitude : (45.766522590766, 4.8992504150412)';
+            $description .=  ' | Ceci est un test 2 |';
+       }
+       else
+        {
+            $longlat='';
+            $description='';
+        }
+
+
+        $chaine="initialize('".$longlat."','".$description."')";
+        echo '<body onload="'.$chaine.'">';
+  
+    ?>
     
-    
-    <body>
         <div class="container">
             <div class="content">
 
@@ -90,35 +125,37 @@
 
             </div>
 
-            <form action="action_page.php" method="post">
+            <form action="/recherche/rechercher" method="post">
+                <label for="jours">Jours : </label> 
 
-            <?php
+                <?php
 
                     $jours=["lundi","mardi","mercredi","jeudi","vendredi","samedi","dimanche"];
 
-                    echo("<select name='select'>");
+                    echo("<select name='jours'>");
                     
                     foreach($jours as $j)
                     {
-                        echo("<option value='".$j."'>".$j."</option>");
+                        if(isset($return))
+                       {
+                            if($j==$return[0])
+                                echo("<option value='".$j."' selected>".$j."</option>");
+                            else
+                                echo("<option value='".$j."'>".$j."</option>");  
+                        }
+                        else
+                            echo("<option value='".$j."'>".$j."</option>");
                     }
 
                     echo("</select><br/><br/>");
 
-                
-                   
+                ?>
 
-                    $json = file_get_contents("https://download.data.grandlyon.com/wfs/grandlyon?SERVICE=WFS&VERSION=2.0.0&outputformat=GEOJSON&request=GetFeature&typename=gin_nettoiement.ginmarche&SRSNAME=urn:ogc:def:crs:EPSG::4171");
-                    $parsed_json = json_decode($json);
+                <label for="ville">Ville : </label>  
+                <input id="ville" name="ville" type="text" placeholder="ville" class="form-control input-md"><br/><br/>
 
-
-
-
-                    /*foreach($parsed_json->{'features'} as $f)
-                    {
-                        echo($f->{'geometry'}->{'coordinates'}[0][0][1].",".$f->{'geometry'}->{'coordinates'}[0][0][0]."<br/>");
-                    } */
-            ?>
+                <label for="valider"></label>
+                <button id="rechercher" name="rechercher">Rechercher</button><br/><br/>
 
             </form>
 
