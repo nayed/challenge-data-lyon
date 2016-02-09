@@ -7,6 +7,7 @@
 
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript">
+        console.log(age)
             function initialize(longlat, description) {
 
                 var myOptions = {
