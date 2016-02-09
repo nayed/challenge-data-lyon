@@ -1,24 +1,31 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Autosuggest from 'react-autosuggest'
 
 export default class SearchBox extends React.Component {
-    createAjax() {
-        let query = ReactDOM.findDOMNode(this.refs.query).value
-        let category = ReactDOM.findDOMNode(this.refs.category).value
-        let URL = `https://itunes.apple.com/search?term=${query}&country=us&entity=${category}`
-        this.props.search(URL)
-        console.log(URL)
+    searchMarket() {
+        let markets = this.props.search
+        let city = ReactDOM.findDOMNode(this.refs.city).value
+        let geometry = markets.map(market => {
+            return market.map(m => {
+                return m.geometry.coordinates
+            })
+        })
+        let properties = markets.map(market => {
+            return market.map(m => {
+                return m.properties
+            })
+        })
+        console.log(geometry, properties)
     }
 
     render() {
+        //console.log(this.props.search)
         return (
             <div>
-                <input type="text" ref="query" />
-                <select ref="category">
-                    <option value="software">Apps</option>
-                    <option value="movie">Films</option>
-                </select>
-                <input type="submit" onClick={this.createAjax.bind(this)} />
+                <input type="text" ref="city" />
+                
+                <input type="submit" onClick={this.searchMarket.bind(this)} />
             </div>
         )
     }
