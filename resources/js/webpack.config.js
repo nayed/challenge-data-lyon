@@ -30,7 +30,7 @@ const common = {
     plugins: [
         new HtmlwebpackPlugin({
             template: 'node_modules/html-webpack-template/index.html',
-            title: 'iTunes Search',
+            title: 'Market Lyon',
             appMountId: 'app'
         })
     ],
@@ -52,6 +52,13 @@ const common = {
                    more custom, pass a path to it. I.e., babel?cacheDirectory=<path> */
                 loaders: ['babel?cacheDirectory'],
                 include: PATHS.app
+            },
+            {
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                loaders: [
+                    'file?hash=sha512&digest=hex&name=[hash].[ext]',
+                    'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+                ]
             }
         ]
     }
