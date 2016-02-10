@@ -16,8 +16,17 @@ Route::get('/', function () {
 });
 
 Route::get('/recherche', 'RechercheController@index');
+
 Route::post('/recherche/rechercher', 'RechercheController@rechercher');
 //Route::post('/recherche/rechercher', ['uses' => 'RechercheController@rechercher', 'as' => 'home']);
+
+// create auto-completion
+Route::get('/autocomplete', function () {
+    return view('autocomplete');
+});
+
+// get Towns data
+Route::get('/town', 'AutoCompleteController@getTown');
 
 /*
 |--------------------------------------------------------------------------
