@@ -3,15 +3,24 @@ import ReactDOM from 'react-dom'
 import $ from 'jquery'
 
 export default class SearchBox extends React.Component {
-    createAjax() {
-        let query = ReactDOM.findDOMNode(this.refs.query).value
-        let category = ReactDOM.findDOMNode(this.refs.category).value
-        let URL = `https://itunes.apple.com/search?term=${query}&country=us&entity=${category}`
-        this.props.search(URL)
-        console.log(URL)
+    searchMarket() {
+        let markets = this.props.search
+        let city = ReactDOM.findDOMNode(this.refs.city).value
+        let geometry = markets.map(market => {
+            return market.map(m => {
+                return m.geometry.coordinates
+            })
+        })
+        let properties = markets.map(market => {
+            return market.map(m => {
+                return m.properties
+            })
+        })
+        console.log(geometry, properties)
     }
 
     render() {
+        //console.log(this.props.search)
         return (
             <div className="app__wrapper">
                 <section className="map-container">
