@@ -22,7 +22,7 @@ class RechercheController extends Controller
 
 	public function rechercher()
 	{
-		if(isset($_POST['jours']) || isset($_POST['ville']))
+		/*if(isset($_POST['jours']) || isset($_POST['ville']))
 		{
 			
 			$jour=$_POST['jours'];
@@ -37,6 +37,6 @@ class RechercheController extends Controller
 		{
 			$erreur = "Veuillez sélectionner un jour ou une ville de marché";
 			return view('recherche')->with('erreur', $erreur);
-		}
+		}*/
 	}
 }
