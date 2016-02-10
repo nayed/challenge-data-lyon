@@ -11,7 +11,7 @@ export default class Results extends React.Component {
         
         return (
             <ul>
-                {resultItems}
+                
             </ul>
         )
     }

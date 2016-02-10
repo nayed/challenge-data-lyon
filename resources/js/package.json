@@ -27,9 +27,9 @@
   "dependencies": {
     "file-loader": "^0.8.5",
     "glob": "^6.0.4",
+    "image-webpack-loader": "^1.6.3",
     "jquery": "^2.2.0",
     "react": "^0.14.6",
-    "react-body-classname": "^1.0.1",
     "react-dom": "^0.14.6"
   }
 }
