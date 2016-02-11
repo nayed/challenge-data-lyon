@@ -8,9 +8,11 @@
         <script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
         <script src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js"></script>
     </head>
-   <body class="body">
+   <body class="body" onload="initialize();">
         <section class="map-container">
             <div id="map"></div>
+            <div id="malongitude"></div>
+            <div id="malatitude"></div>
         </section>
         <section class="header">
             <div class="header__logo">
@@ -36,13 +38,13 @@
         </section>
         <section class="days">
             <ul class="days__list">
-                <li class="days__item" data-value="lundi" data-checked="true">Lun</li>
-                <li class="days__item" data-value="mardi" data-checked="false">Mar</li>
-                <li class="days__item" data-value="mercredi" data-checked="true">Mer</li>
-                <li class="days__item" data-value="jeudi" data-checked="false">Jeu</li>
-                <li class="days__item" data-value="vendredi" ata-checked="false">Ven</li>
-                <li class="days__item" data-value="samedi" data-checked="false">Sam</li>
-                <li class="days__item" data-value="dimanche" data-checked="true">Dim</li>
+                <li class="days__item" data-value="lundi" id="jour_1" data-checked="false" onclick="RecupChangementJour(this.value)">Lun</li>
+                <li class="days__item" data-value="mardi" id="jour_2" data-checked="false" onclick="RecupChangementJour(this.value)">Mar</li>
+                <li class="days__item" data-value="mercredi" id="jour_3" data-checked="false" onclick="RecupChangementJour(this.value)">Mer</li>
+                <li class="days__item" data-value="jeudi" id="jour_4" data-checked="false" onclick="RecupChangementJour(this.value)">Jeu</li>
+                <li class="days__item" data-value="vendredi" id="jour_5" data-checked="false" onclick="RecupChangementJour(this.value)">Ven</li>
+                <li class="days__item" data-value="samedi" id="jour_6" data-checked="false" onclick="RecupChangementJour(this.value)">Sam</li>
+                <li class="days__item" data-value="dimanche" id="jour_7" data-checked="false" onclick="RecupChangementJour(this.value)">Dim</li>
             </ul>
         </section>
         <section class="popup" style="display:table;">
@@ -65,5 +67,6 @@
            </div>
         </section>
         <script src="js/frontend.js"></script>
+        <script src="js/markers.js"></script>
     </body>
 </html>
