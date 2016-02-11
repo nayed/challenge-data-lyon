@@ -4,7 +4,7 @@ $(document).ready(function(){
     // google map
 
     var previousPosition = null;
-   
+
     function initialize() {
 
       var styles = [
@@ -243,25 +243,24 @@ $(document).ready(function(){
         }
     });
 
-
-    // autocompletion
-
-    var availableTags = [
-        "lyon",
-        "chassieu",
-        "vaux-en-velin",
-        'villeurbanne'
-    ];
-
-    $('.search__input').autocomplete({
-        minLength : 0,
-        source : availableTags
+    // ajax request for autocompletion
+    $.ajax({
+        url : '/autocomplete/town',
+        type : 'GET',
+        cache: false,
+        dataType : 'json',
+        success: function(data) {
+            console.log(data);
+            var availableTags = data;
+            $('.search__input').autocomplete({
+                minLength : 0,
+                source : availableTags
+            });
+        },
+        error: function(data) {
+            console.log("error");
+        },
     });
-
-    $('.ui-menu-item').on("autocompletefcus", function(event, ui){
-        $(this).addClass('focus');
-    });
-
 
     // popup
 
