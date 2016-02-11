@@ -2,16 +2,13 @@
 <html>
     <head>
         <title>Laravel</title>
-
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
         <link href="css/main.css" rel="stylesheet" type="text/css">
         <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
         <script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
         <script src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js"></script>
-
     </head>
-    
-    <body class="body">
+   <body class="body">
         <section class="map-container">
             <div id="map"></div>
         </section>
@@ -48,7 +45,6 @@
                 <li class="days__item" data-value="dimanche" data-checked="true">Dim</li>
             </ul>
         </section>
-
         <section class="popup" style="display:table;">
             <div class="popup__wrapper">
                 <div class="popup__container">
@@ -66,9 +62,8 @@
                     </ul>
                     <button class="popup__close"><i class="fa fa-times"></i>
                 </div>
-            </div>
+           </div>
         </section>
-
         <script src="js/frontend.js"></script>
     </body>
 </html>
