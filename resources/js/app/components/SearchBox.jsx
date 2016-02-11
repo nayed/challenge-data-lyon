@@ -1,13 +1,45 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import $ from 'jquery'
+import Autosuggest from 'react-autosuggest'
+import languages from './language'
+
+function getSuggestions(value) {
+  const inputValue = value.trim().toLowerCase()
+  const inputLength = inputValue.length
+
+  return inputLength === 0 ? [] : languages.filter(lang =>
+    lang.name.toLowerCase().slice(0, inputLength) === inputValue
+  )
+}
+
+function getSuggestionValue(suggestion) { // when suggestion selected, this function tells
+  return suggestion.name                 // what should be the value of the input
+}
+
+function renderSuggestion(suggestion) {
+  return (
+    <span>{suggestion.name}</span>
+  )
+}
 
 
 
 
 
 export default class SearchBox extends React.Component {
-    searchMarket() {
+    constructor() {
+        super()
+        this.state = {
+          value: '',
+          suggestions: getSuggestions('')
+        }
+
+        this.onChange = this.onChange.bind(this);
+        this.onSuggestionsUpdateRequested = this.onSuggestionsUpdateRequested.bind(this);
+    }
+
+    /*searchMarket() {
         let markets = this.props.search
         let city = ReactDOM.findDOMNode(this.refs.city).value
         let geometry = markets.map(market => {
@@ -21,10 +53,45 @@ export default class SearchBox extends React.Component {
             })
         })
         console.log(geometry, properties)
-    }
+    }*/
+
+     onChange(event, { newValue }) {
+        this.setState({
+          value: newValue
+        })
+      }
+
+      onSuggestionsUpdateRequested({ value }) {
+        this.setState({
+          suggestions: getSuggestions(value)
+        })
+      }
 
     render() {
+<<<<<<< HEAD
 
+=======
+    const { value, suggestions } = this.state;
+    const inputProps = {
+      placeholder: 'Type a programming language',
+      value,
+      onChange: this.onChange
+    }
+
+    return (
+      <Autosuggest suggestions={suggestions}
+                   onSuggestionsUpdateRequested={this.onSuggestionsUpdateRequested}
+                   getSuggestionValue={getSuggestionValue}
+                   renderSuggestion={renderSuggestion}
+                   inputProps={inputProps} />
+    )
+  }
+}
+
+/*
+render() {
+        console.log(language)
+>>>>>>> master
         return (
             <div className="app__wrapper">
                 <div id="map"></div>
@@ -72,6 +139,7 @@ export default class SearchBox extends React.Component {
                 </script>
 
             </div>
+<<<<<<< HEAD
         )       
     }
 
@@ -82,3 +150,7 @@ export default class SearchBox extends React.Component {
     }
 
   }
+=======
+        )
+    }*/
+>>>>>>> master

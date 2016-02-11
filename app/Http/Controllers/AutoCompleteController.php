@@ -45,7 +45,7 @@ class AutoCompleteController extends Controller
     // debug mode
     /*dump($arrayTown);
     die;*/
-
-    return array("datas" => $arrayTown);
+    $type = "application/json";
+    return response()->json($arrayTown)->header('Content-type', $type);
   }
 }

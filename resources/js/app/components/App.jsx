@@ -21,24 +21,28 @@ export default class App extends React.Component {
     search(URL) {
         $.ajax({
             type: "GET",
-            dataType: 'json',
+            dataType: 'jsonp',
             url: URL,
+            contentType: 'application/json',
             success: function(response) {
-                //console.log(response)
+                console.log('YES')
+                console.log($.parseJSON(response))
                 this.showResults(response)
             }.bind(this),
             error: function(xhr, status, err) {
+                console.log('NOPE')
                 console.error(status, err)
             }.bind(this)
         })
     }
 
     componentDidMount() {
-        this.search('https://download.data.grandlyon.com/wfs/grandlyon?SERVICE=WFS&VERSION=2.0.0&outputformat=GEOJSON&request=GetFeature&typename=gin_nettoiement.ginmarche&SRSNAME=urn:ogc:def:crs:EPSG::4171')
+        //this.search('https://download.data.grandlyon.com/wfs/grandlyon?SERVICE=WFS&VERSION=2.0.0&outputformat=GEOJSON&request=GetFeature&typename=gin_nettoiement.ginmarche&SRSNAME=urn:ogc:def:crs:EPSG::4171')
+        this.search('getTown')
     }
 
     render() {
-        //console.log(this.state.searchResults)
+        console.log(this.state.searchResults)
         return (
             <SearchBox />
         )
