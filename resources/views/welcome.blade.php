@@ -4,7 +4,8 @@
         <title>Laravel</title>
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <style>
             html, body {
                 height: 100%;
@@ -37,12 +38,28 @@
 
     </head>
     
-    <body onload="initialize('45.766522590766,4.8992504150412 | 45.744016572944332,4.918889800755741')">
+    <body>
         <div class="container">
             <div class="content">
 
                 <div class="title">Challenge Data Lyon</div>
             </div>
         </div>
+        <script type="text/javascript">
+        $.ajax({
+            type: "GET",
+            dataType: 'json',
+            url: '/town',
+            contentType: 'application/json',
+            success: function(response) {
+                console.log('YES')
+                console.log(response)
+            }.bind(this),
+            error: function(xhr, status, err) {
+                console.log('NOPE')
+                console.error(status, err)
+            }.bind(this)
+        })
+        </script>
     </body>
 </html>

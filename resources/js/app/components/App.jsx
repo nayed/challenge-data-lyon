@@ -38,7 +38,7 @@ export default class App extends React.Component {
 
     componentDidMount() {
         //this.search('https://download.data.grandlyon.com/wfs/grandlyon?SERVICE=WFS&VERSION=2.0.0&outputformat=GEOJSON&request=GetFeature&typename=gin_nettoiement.ginmarche&SRSNAME=urn:ogc:def:crs:EPSG::4171')
-        this.search('http://localhost:8000/town')
+        this.search('getTown')
     }
 
     render() {
