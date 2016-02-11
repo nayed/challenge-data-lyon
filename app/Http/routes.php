@@ -28,7 +28,7 @@ Route::get('/autocomplete', function () {
 });
 
 // get Towns data
-Route::get('/town', 'AutoCompleteController@getTown');
+Route::get('/autocomplete/town', 'AutoCompleteController@getTownAutoComplete');
 
 /*
 |--------------------------------------------------------------------------
