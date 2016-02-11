@@ -5,11 +5,11 @@
 
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 
-        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=geometry"></script>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript">
         console.log(age)
 
-            function RecupChangementJour(jour){
+            /*function RecupChangementJour(jour){
 
                 if(jour != 0)
                 {
@@ -240,6 +240,266 @@
 
                         infowindow.open(map,marker);
                 }
+            }*/
+
+
+            function RecupChangementJour(jour){
+
+                
+                if(document.getElementById('jour_'+jour).getAttribute("data-checked") == "true")
+                {
+                    document.getElementById('jour_'+jour).setAttribute("data-checked",false);
+                }
+                else
+                {
+                    document.getElementById('jour_'+jour).setAttribute("data-checked",true);
+                }
+                
+
+                var myOptions = {
+                    center: new google.maps.LatLng(45.750000,4.850000),
+                    zoom: 11,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+
+                var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);               
+
+                function RechercheJour() 
+                { 
+                   if (req.readyState == 4) 
+                   { 
+                        var doc = eval('(' + req.responseText + ')'); 
+
+
+                        for(i=0;i<doc.features.length;i++)
+                        {
+
+                            for(var j=1;j<=7;j++)
+                            {
+                                if(document.getElementById('jour_'+j).getAttribute("data-checked") == "true")
+                                {
+
+                                    longitude = doc.features[i].geometry.coordinates[0][0][0];
+                                    latitude = doc.features[i].geometry.coordinates[0][0][1];   
+
+                                    switch(j) {
+                                    case 1:
+
+                                        if(doc.features[i].properties.lundi != "Non")
+                                        {
+
+                                            var myLatlng=new google.maps.LatLng(latitude,longitude);
+                                            var chaine = "<b>"+doc.features[i].properties.nom+"</b><br/><br/>Gestionnaire : " + doc.features[i].properties.gestionnaire + "<br/>Superficie : " + doc.features[i].properties.surface +"<br/><br/>Lundi : "+doc.features[i].properties.lundi + "<br/>Mardi : " + doc.features[i].properties.mardi + "<br/>Mercredi : "+doc.features[i].properties.mercredi + "<br/>Jeudi : "+ doc.features[i].properties.jeudi + "<br/>Vendredi : " + doc.features[i].properties.vendredi + "<br/>Samedi : " + doc.features[i].properties.samedi + "<br/>Dimanche : " + doc.features[i].properties.dimanche
+                                
+                                            var infowindow = new google.maps.InfoWindow({
+                                                content: chaine
+                                            });
+
+                                            marker = new google.maps.Marker({
+                                                position: myLatlng,
+                                                map: map,
+                                                info: chaine,
+                                                animation: google.maps.Animation.DROP
+                                              });
+
+                                            google.maps.event.addListener(marker, 'click', function(){
+                                                infowindow.setContent(this.info);
+                                                infowindow.open(map,this);
+                                            });
+                                        }
+                                        break;
+                                    case 2:
+
+                                        if(doc.features[i].properties.mardi != "Non")
+                                        {
+
+                                            var myLatlng=new google.maps.LatLng(latitude,longitude);
+                                            var chaine = "<b>"+doc.features[i].properties.nom+"</b><br/><br/>Gestionnaire : " + doc.features[i].properties.gestionnaire + "<br/>Superficie : " + doc.features[i].properties.surface +"<br/><br/>Lundi : "+doc.features[i].properties.lundi + "<br/>Mardi : " + doc.features[i].properties.mardi + "<br/>Mercredi : "+doc.features[i].properties.mercredi + "<br/>Jeudi : "+ doc.features[i].properties.jeudi + "<br/>Vendredi : " + doc.features[i].properties.vendredi + "<br/>Samedi : " + doc.features[i].properties.samedi + "<br/>Dimanche : " + doc.features[i].properties.dimanche
+                                
+                                            var infowindow = new google.maps.InfoWindow({
+                                                content: chaine
+                                            });
+
+                                            marker = new google.maps.Marker({
+                                                position: myLatlng,
+                                                map: map,
+                                                info: chaine,
+                                                animation: google.maps.Animation.DROP
+                                              });
+
+                                            google.maps.event.addListener(marker, 'click', function(){
+                                                infowindow.setContent(this.info);
+                                                infowindow.open(map,this);
+                                            });
+                                        }
+                                        break;
+                                    case 3:
+
+                                        if(doc.features[i].properties.mercredi != "Non")
+                                        {
+
+                                            var myLatlng=new google.maps.LatLng(latitude,longitude);
+                                            var chaine = "<b>"+doc.features[i].properties.nom+"</b><br/><br/>Gestionnaire : " + doc.features[i].properties.gestionnaire + "<br/>Superficie : " + doc.features[i].properties.surface +"<br/><br/>Lundi : "+doc.features[i].properties.lundi + "<br/>Mardi : " + doc.features[i].properties.mardi + "<br/>Mercredi : "+doc.features[i].properties.mercredi + "<br/>Jeudi : "+ doc.features[i].properties.jeudi + "<br/>Vendredi : " + doc.features[i].properties.vendredi + "<br/>Samedi : " + doc.features[i].properties.samedi + "<br/>Dimanche : " + doc.features[i].properties.dimanche
+                                
+                                            var infowindow = new google.maps.InfoWindow({
+                                                content: chaine
+                                            });
+
+                                            marker = new google.maps.Marker({
+                                                position: myLatlng,
+                                                map: map,
+                                                info: chaine,
+                                                animation: google.maps.Animation.DROP
+                                              });
+
+                                            google.maps.event.addListener(marker, 'click', function(){
+                                                infowindow.setContent(this.info);
+                                                infowindow.open(map,this);
+                                            });
+                                        }
+                                        break;
+                                    case 4:
+
+                                        if(doc.features[i].properties.jeudi != "Non")
+                                        {
+
+                                            var myLatlng=new google.maps.LatLng(latitude,longitude);
+                                            var chaine = "<b>"+doc.features[i].properties.nom+"</b><br/><br/>Gestionnaire : " + doc.features[i].properties.gestionnaire + "<br/>Superficie : " + doc.features[i].properties.surface +"<br/><br/>Lundi : "+doc.features[i].properties.lundi + "<br/>Mardi : " + doc.features[i].properties.mardi + "<br/>Mercredi : "+doc.features[i].properties.mercredi + "<br/>Jeudi : "+ doc.features[i].properties.jeudi + "<br/>Vendredi : " + doc.features[i].properties.vendredi + "<br/>Samedi : " + doc.features[i].properties.samedi + "<br/>Dimanche : " + doc.features[i].properties.dimanche
+                                
+                                            var infowindow = new google.maps.InfoWindow({
+                                                content: chaine
+                                            });
+
+                                            marker = new google.maps.Marker({
+                                                position: myLatlng,
+                                                map: map,
+                                                info: chaine,
+                                                animation: google.maps.Animation.DROP
+                                              });
+
+                                            google.maps.event.addListener(marker, 'click', function(){
+                                                infowindow.setContent(this.info);
+                                                infowindow.open(map,this);
+                                            });
+                                        }
+                                        break;
+                                    case 5:
+
+                                        if(doc.features[i].properties.vendredi != "Non")
+                                        {
+
+                                            var myLatlng=new google.maps.LatLng(latitude,longitude);
+                                            var chaine = "<b>"+doc.features[i].properties.nom+"</b><br/><br/>Gestionnaire : " + doc.features[i].properties.gestionnaire + "<br/>Superficie : " + doc.features[i].properties.surface +"<br/><br/>Lundi : "+doc.features[i].properties.lundi + "<br/>Mardi : " + doc.features[i].properties.mardi + "<br/>Mercredi : "+doc.features[i].properties.mercredi + "<br/>Jeudi : "+ doc.features[i].properties.jeudi + "<br/>Vendredi : " + doc.features[i].properties.vendredi + "<br/>Samedi : " + doc.features[i].properties.samedi + "<br/>Dimanche : " + doc.features[i].properties.dimanche
+                                
+                                            var infowindow = new google.maps.InfoWindow({
+                                                content: chaine
+                                            });
+
+                                            marker = new google.maps.Marker({
+                                                position: myLatlng,
+                                                map: map,
+                                                info: chaine,
+                                                animation: google.maps.Animation.DROP
+                                              });
+
+                                            google.maps.event.addListener(marker, 'click', function(){
+                                                infowindow.setContent(this.info);
+                                                infowindow.open(map,this);
+                                            });
+                                        }
+                                        break;
+                                    case 6:
+
+                                        if(doc.features[i].properties.samedi != "Non")
+                                        {
+
+                                            var myLatlng=new google.maps.LatLng(latitude,longitude);
+                                            var chaine = "<b>"+doc.features[i].properties.nom+"</b><br/><br/>Gestionnaire : " + doc.features[i].properties.gestionnaire + "<br/>Superficie : " + doc.features[i].properties.surface +"<br/><br/>Lundi : "+doc.features[i].properties.lundi + "<br/>Mardi : " + doc.features[i].properties.mardi + "<br/>Mercredi : "+doc.features[i].properties.mercredi + "<br/>Jeudi : "+ doc.features[i].properties.jeudi + "<br/>Vendredi : " + doc.features[i].properties.vendredi + "<br/>Samedi : " + doc.features[i].properties.samedi + "<br/>Dimanche : " + doc.features[i].properties.dimanche
+                                
+                                            var infowindow = new google.maps.InfoWindow({
+                                                content: chaine
+                                            });
+
+                                            marker = new google.maps.Marker({
+                                                position: myLatlng,
+                                                map: map,
+                                                info: chaine,
+                                                animation: google.maps.Animation.DROP
+                                              });
+
+                                            google.maps.event.addListener(marker, 'click', function(){
+                                                infowindow.setContent(this.info);
+                                                infowindow.open(map,this);
+                                            });
+                                        }
+                                        break;
+                                    case 7:
+
+                                        if(doc.features[i].properties.dimanche != "Non")
+                                        {
+
+                                            var myLatlng=new google.maps.LatLng(latitude,longitude);
+                                            var chaine = "<b>"+doc.features[i].properties.nom+"</b><br/><br/>Gestionnaire : " + doc.features[i].properties.gestionnaire + "<br/>Superficie : " + doc.features[i].properties.surface +"<br/><br/>Lundi : "+doc.features[i].properties.lundi + "<br/>Mardi : " + doc.features[i].properties.mardi + "<br/>Mercredi : "+doc.features[i].properties.mercredi + "<br/>Jeudi : "+ doc.features[i].properties.jeudi + "<br/>Vendredi : " + doc.features[i].properties.vendredi + "<br/>Samedi : " + doc.features[i].properties.samedi + "<br/>Dimanche : " + doc.features[i].properties.dimanche
+                                
+                                            var infowindow = new google.maps.InfoWindow({
+                                                content: chaine
+                                            });
+
+                                            marker = new google.maps.Marker({
+                                                position: myLatlng,
+                                                map: map,
+                                                info: chaine,
+                                                animation: google.maps.Animation.DROP
+                                              });
+
+                                            google.maps.event.addListener(marker, 'click', function(){
+                                                infowindow.setContent(this.info);
+                                                infowindow.open(map,this);
+                                            });
+                                        }
+                                        break;
+
+                                    default :
+                                            break;
+                                    }     
+                                }
+                            }
+                            
+                        }
+
+                   }
+                }
+
+                var req = new XMLHttpRequest();
+                req.open("GET", "https://download.data.grandlyon.com/wfs/grandlyon?SERVICE=WFS&VERSION=2.0.0&outputformat=GEOJSON&request=GetFeature&typename=gin_nettoiement.ginmarche&SRSNAME=urn:ogc:def:crs:EPSG::4171", true); 
+                req.onreadystatechange = RechercheJour;  
+                req.send(null); 
+
+                
+              var myLatlng=new google.maps.LatLng(document.getElementById("malatitude").innerHTML, document.getElementById("malongitude").innerHTML);
+                
+                var pinColor = "8FCF3C";
+                var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+                    new google.maps.Size(21, 34),
+                    new google.maps.Point(0,0),
+                    new google.maps.Point(10, 34));
+
+                marker = new google.maps.Marker({
+                    position: myLatlng,
+                    map: map,
+                    icon: pinImage,
+                    animation: google.maps.Animation.DROP
+                  });
+
+
+                
+                var infowindow = new google.maps.InfoWindow({
+                    content: "Vous êtes ici !"
+                });
+
+                infowindow.open(map,marker);
+
+                            
             }
 
 
@@ -333,6 +593,8 @@
 
 
             function initialize() {
+
+                console.log(document.getElementById("map_canvas"));
 
                 var myOptions = {
                     center: new google.maps.LatLng(45.750000,4.850000),
@@ -486,24 +748,39 @@
 
             <p>
 
+
+                <li className="days__item" data-value="lundi" id="jour_1" value="1" data-checked="false" onclick="RecupChangementJour(this.value)">Lun</li>
+                <li className="days__item" data-value="mardi" id="jour_2" value="2" data-checked="false" onclick="RecupChangementJour(this.value)">Mar</li>
+                <li className="days__item" data-value="mercredi" id="jour_3" value="3" data-checked="false" onclick="RecupChangementJour(this.value)">Mer</li>
+                <li className="days__item" data-value="jeudi" id="jour_4" value="4" data-checked="false" onclick="RecupChangementJour(this.value)">Jeu</li>
+                <li className="days__item" data-value="vendredi" id="jour_5" value="5" data-checked="false" onclick="RecupChangementJour(this.value)">Ven</li>
+                <li className="days__item" data-value="samedi" id="jour_6" value="6" data-checked="false" onclick="RecupChangementJour(this.value)">Sam</li>
+                <li className="days__item" data-value="dimanche" id="jour_7" value="7" data-checked="false" onclick="RecupChangementJour(this.value)">Dim</li>
+
+<!--
+
                 <label for="jours">Jours : </label> 
 
-                                
+                        
+
+                
 
                     <select name='jours' onchange='RecupChangementJour(this.value)'>
+
+
                     <option value='0'>-- Sélectionnez un jour --</option>
 
                 <?php
                     $jours=["lundi","mardi","mercredi","jeudi","vendredi","samedi","dimanche"];
                     
-                    foreach($jours as $j)
+                   /* foreach($jours as $j)
                     {
                         echo("<option value='".$j."'>".$j."</option>");
                     }
 
-                    echo("</select><br/><br/>");
+                    echo("</select><br/><br/>");*/
 
-                ?>
+                ?>-->
 
                 <label for="ville">Ville : </label>  
                 <input id="ville" name="ville" type="text" placeholder="ville" onkeyup="RecupChangementVille(this.value)"><br/><br/>
