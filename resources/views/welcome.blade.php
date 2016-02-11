@@ -48,7 +48,7 @@
             </ul>
         </section>
 
-        <section class="popup">
+        <section class="popup" style="display:table;">
             <div class="popup__wrapper">
                 <div class="popup__container">
                     <i class="popup__icon fa fa-shopping-basket"></i>
@@ -67,6 +67,7 @@
                 </div>
             </div>
         </section>
+
         <script src="js/frontend.js"></script>
     </body>
 </html>
