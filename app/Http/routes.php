@@ -30,17 +30,7 @@ Route::get('/autocomplete', function () {
 // get Towns data
 Route::get('/autocomplete/town', 'AutoCompleteController@getTownAutoComplete');
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| This route group applies the "web" middleware group to every route
-| it contains. The "web" middleware group is defined in your HTTP
-| kernel and includes session state, CSRF protection, and more.
-|
-*/
 
-Route::group(['middleware' => ['web']], function () {
-    //
-});
+
+// test
+Route::get('/testGeo', 'GeocodeController@index');

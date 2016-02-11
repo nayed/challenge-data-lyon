@@ -8,6 +8,7 @@
         <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
         <script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
         <script src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js"></script>
+
     </head>
     
     <body class="body">

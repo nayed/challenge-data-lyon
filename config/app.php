@@ -157,6 +157,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
+        Jcf\Geocode\GeocodeServiceProvider::class,
+        Toin0u\Geotools\GeotoolsServiceProvider::class
     ],
 
     /*
@@ -202,7 +204,9 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
-        'Javascript' => Laracasts\Utilities\JavaScript\JavaScriptFacade::class 
+        'Javascript' => Laracasts\Utilities\JavaScript\JavaScriptFacade::class,
+        'Geocode' => Jcf\Geocode\Facades\Geocode::class,
+        'Geotools' => Toin0u\Geotools\Facade\Geotools::class
     ],
 
 ];
