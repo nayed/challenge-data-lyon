@@ -52,6 +52,9 @@
             url: '/town',
             contentType: 'application/json',
             success: function(response) {
+                jQuery.each(response, function(index, itemData) {
+                    console.log(response.itemData);
+                });
                 console.log('YES')
                 console.log(response)
             }.bind(this),

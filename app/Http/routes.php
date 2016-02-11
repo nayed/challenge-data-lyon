@@ -30,6 +30,23 @@ Route::get('/autocomplete', function () {
 // get Towns data
 Route::get('/town', 'AutoCompleteController@getTown');
 
+
+// get Init (initialisation de la map)
+Route::get('/init/', 'GeometryController@getValues');
+
+
+// get Values 
+Route::get('/days/{days}', 'GeometryController@getDays');
+
+
+// get Towns data
+Route::get('/towns/{town}', 'GeometryController@getTowns');
+
+/*Route::get('/towns/{days}/{town?}', function ($town = null) {
+    return $name;
+});
+*/
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
