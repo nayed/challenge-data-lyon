@@ -1,13 +1,12 @@
 $(document).ready(function(){
 
-    $('.days__item').on('click', function(){
+    /*$('.days__item').on('click', function(){
         if($(this).attr('data-checked') == 'true'){
             $(this).attr('data-checked', 'false');
         } else {
             $(this).attr('data-checked', 'true');
         }
-    });
-
+    });*/
 
     // focus input
 
@@ -17,6 +16,8 @@ $(document).ready(function(){
 
     $('.search__input').on('focusout', function(){
         $('.search__button').fadeOut();
+
+        RecupChangementVille();
     });
 
 
@@ -61,3 +62,5 @@ $(document).ready(function(){
 
 
 });
+
+
