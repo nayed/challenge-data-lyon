@@ -38,10 +38,6 @@ class AutoCompleteController extends Controller
       // get only vales of array after do array_unique (no index)
       $whatIReallyNeed = array_values($result);
 
-      // debug mode
-      // dump($win);
-      // die;
-
       // set charset
       $charset = "UTF-8";
       //set content type
