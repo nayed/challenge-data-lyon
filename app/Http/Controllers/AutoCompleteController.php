@@ -10,42 +10,45 @@ use Javascript;
 
 class AutoCompleteController extends Controller
 {
-  public function index()
+  public function getTownAutoComplete(Request $request)
   {
-    // Javascript::put([
-    //       'foo' => 'bar',
-    //       'age' => 29
-    //   ]);
+    if($request->isXmlHttpRequest()) {
+      // set url of data grand Lyon
+      $json_url = "https://download.data.grandlyon.com/wfs/grandlyon?SERVICE=WFS&VERSION=2.0.0&outputformat=GEOJSON&request=GetFeature&typename=gin_nettoiement.ginmarche&SRSNAME=urn:ogc:def:crs:EPSG::4171";
 
-    return view('autocomplete');
-  }
+      // get contents of file
+      $json = file_get_contents($json_url);
 
-  public function getTown()
-  {
-    // set url of data grand Lyon
-    $json_url = "https://download.data.grandlyon.com/wfs/grandlyon?SERVICE=WFS&VERSION=2.0.0&outputformat=GEOJSON&request=GetFeature&typename=gin_nettoiement.ginmarche&SRSNAME=urn:ogc:def:crs:EPSG::4171";
+      // decode json datas
+      $datas = json_decode($json, TRUE);
 
-    // get contents of file
-    $json = file_get_contents($json_url);
+      // get the multi json array
+      $arrayFeatures = $datas["features"];
 
-    // decode json datas
-    $datas = json_decode($json, TRUE);
+      // define a new empty array
+      $arrayTown = array();
 
-    // get the multi json array
-    $arrayFeatures = $datas["features"];
+      // populate the new array with values we need
+      foreach ($arrayFeatures as $feature) {
+        array_push($arrayTown, $feature["properties"]["commune"]);
+      }
 
-    // define a new empty array
-    $arrayTown = array();
+      // get unique entry for array
+      $result = array_unique($arrayTown);
+      // get only vales of array after do array_unique (no index)
+      $whatIReallyNeed = array_values($result);
 
-    // populate the new array with values we need
-    foreach ($arrayFeatures as $feature) {
-      array_push($arrayTown, array("id" => $feature["properties"]["gid"], "town" => $feature["properties"]["commune"], "name" => $feature["properties"]["nom"]));
+      // set charset
+      $charset = "UTF-8";
+      //set content type
+      $type = "application/json";
+
+      // the best return ever ;)
+      return response()->json($whatIReallyNeed)->header('Content-type', $type, 'charset', $charset);
+
+    } else {
+        // don't dream
+        echo "what do you think dude !!!";
     }
-
-    // debug mode
-    /*dump($arrayTown);
-    die;*/
-    $type = "application/json";
-    return response()->json($arrayTown)->header('Content-type', $type);
   }
 }
