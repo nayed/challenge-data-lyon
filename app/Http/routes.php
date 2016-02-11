@@ -28,8 +28,7 @@ Route::get('/autocomplete', function () {
 });
 
 // get Towns data
-Route::get('/town', 'AutoCompleteController@getTown');
-
+Route::get('/autocomplete/town', 'AutoCompleteController@getTownAutoComplete');
 
 // get Init (initialisation de la map)
 Route::get('/init/', 'GeometryController@getValues');
@@ -42,22 +41,5 @@ Route::get('/days/{days}', 'GeometryController@getDays');
 // get Towns data
 Route::get('/towns/{town}', 'GeometryController@getTowns');
 
-/*Route::get('/towns/{days}/{town?}', function ($town = null) {
-    return $name;
-});
-*/
-
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| This route group applies the "web" middleware group to every route
-| it contains. The "web" middleware group is defined in your HTTP
-| kernel and includes session state, CSRF protection, and more.
-|
-*/
-
-Route::group(['middleware' => ['web']], function () {
-    //
-});
+// test
+Route::get('/testGeo', 'GeocodeController@index');

@@ -5,3 +5,4 @@ Homestead.json
 .env
 auth.json
 .env.example
+resources/js/node_modules
