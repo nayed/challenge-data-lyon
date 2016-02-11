@@ -243,6 +243,7 @@ $(document).ready(function(){
         }
     });
 
+
     // autocompletion
 
     var availableTags = [
@@ -260,6 +261,13 @@ $(document).ready(function(){
     $('.ui-menu-item').on("autocompletefcus", function(event, ui){
         $(this).addClass('focus');
     });
+
+
+    // popup
+
+    $('.popup__close').on('click', function(){
+        $('.popup').css('display', 'none');
+    })
 
 
 });
