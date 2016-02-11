@@ -1,0 +1,189 @@
+html * {
+  box-sizing: border-box; }
+
+html, body, .map-container, #app, .app__wrapper{
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: #4DAF7C;
+  font-family: 'Averia Sans Libre', cursive;
+  overflow: hidden; }
+
+.search {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70%;
+  margin: 200px 15% 0 15%;
+  z-index: 100;
+  box-sizing: border-box; }
+  .search__wrapper {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center; }
+  .search__bar {
+    position: relative; }
+  .search__list {
+    display: none;
+    margin: 0;
+    padding: 0; }
+  .search__item {
+    display: block;
+    padding: 15px 25px;
+    font-size: 18px;
+    background-color: white;
+    margin: 5px 48% 5px 5%;
+    list-style-type: none;
+    border-radius: 6px;
+    color: #BFBFBF;
+    border-bottom: 3px solid #a6a6a6;
+    transition: all 200ms cubic-bezier(1, 0, 0, 1);
+    text-transform: uppercase; }
+    .search__item--prox {
+      color: white;
+      background-color: #BDC3C7;
+      border-bottom: 3px solid #a1aab0; }
+      .search__item--prox i {
+        float: left;
+        font-size: 25px; }
+    .search__item:hover {
+      margin: 5px 45% 5px 7%;
+      cursor: pointer;
+      background-color: #c6c6c6;
+      color: white; }
+  .search__input {
+    border: none;
+    padding: 20px;
+    width: 60%;
+    border-radius: 6px;
+    overflow: hidden;
+    box-sizing: border-box;
+    color: white;
+    text-align: left;
+    position: relative;
+    font-family: 'Averia Sans Libre', cursive;
+    font-size: 22px;
+    border-bottom: 3px solid #01654e;
+    transition: all 600ms cubic-bezier(1, 0, 0, 1), width 1200ms cubic-bezier(1, 0, 0, 1);
+    display: inline-block;
+    background: url(./img/search.svg) #049372 no-repeat;
+    background-size: 40px 40px;
+    background-position: center right, 20px 20px; }
+    .search__input:focus {
+      margin: 30px 0 10px 0;
+      background-color: white;
+      color: #F39C12;
+      border-bottom: 3px solid #c87f0a;
+      width: 100%; }
+  .search__button {
+    border: 0px;
+    padding: 5px;
+    font-size: 30px;
+    height: 50px;
+    width: 50px;
+    border-radius: 300px;
+    background-color: #F27935;
+    color: white;
+    border-bottom: 2px solid #b06f09;
+    position: absolute;
+    top: 38px;
+    right: 10px;
+    transition: all 300ms ease-out;
+    display: none; }
+    .search__button:hover {
+      background-color: #D35400;
+      border-bottom: 0px;
+      cursor: pointer;
+      top: 42px; }
+
+html {
+  border-top: 5px solid #01654e; }
+
+body {
+  border-top: 15px solid #019875; }
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px; }
+  .header__logo {
+    color: white;
+    text-align: center;
+    width: 250px;
+    margin: 0 auto;
+    background-color: #019875;
+    border-radius: 0px 0px 30px 30px;
+    border-top: 5px solid #01654e;
+    padding: 10px 0 15px;
+    letter-spacing: -2px;
+    border-bottom: 2px solid #F27935; }
+    .header__logo .fa-shopping-basket {
+      font-size: 25px;
+      color: white;
+      margin: 0;
+      background-color: #F27935;
+      width: 50px;
+      height: 50px;
+      padding: 12px 10px;
+      border-radius: 100px; }
+    .header__logo > * {
+      display: inline-block; }
+    .header__logo h1 {
+      font-size: 32px;
+      margin: 0; }
+    .header__logo b {
+      color: #F27935; }
+    .header__logo i {
+      margin: 0 10px; }
+    .header__logo__grandlyon {
+      height: auto;
+      max-width: 80px;
+      display: inline-block; }
+
+.days {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-bottom: 4px solid #D35400; }
+  .days__list {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    background-color: #F27935;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    position: relative;
+    height: 20px; }
+  .days__item {
+    display: inline-block;
+    list-style-type: none;
+    color: #6C7A89;
+    height: 60px;
+    width: 60px;
+    border-radius: 300px;
+    background-color: white;
+    position: relative;
+    bottom: 50px;
+    padding-top: 18px;
+    font-size: 18px;
+    border-bottom: 4px solid #D35400;
+    transition: all 300ms cubic-bezier(1, 0, 0, 1);
+    margin: 0 3px; }
+    .days__item:hover {
+      background-color: #F39C12;
+      cursor: pointer;
+      color: white;
+      bottom: 55px;
+      transform: scale(1.3); }
+    .days__item[data-checked="true"] {
+      background-color: #87D37C;
+      color: white; }
+      .days__item[data-checked="true"]:before {
+        font-family: 'fontAwesome';
+        content: '\f00c';
+        color: #01654e; }
