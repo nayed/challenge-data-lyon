@@ -43,13 +43,13 @@ class GeocodeController extends Controller
         //$ip = '109.190.123.248'; //Set an ip to test
         $url = "http://freegeoip.net/json/{$ip}";
         $ch  = curl_init();
-        
+
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
         $data = curl_exec($ch);
         curl_close($ch);
-        
+
         if ($data) {
             return json_decode($data);
         } else {
@@ -74,7 +74,7 @@ class GeocodeController extends Controller
 
         // get the multi json array
         $arrayFeatures = $datas["features"];
-        
+
         // define a new empty array
         $arrayTown = array();
 
@@ -90,10 +90,10 @@ class GeocodeController extends Controller
                                             "name"=>$feature["properties"]["nom"],
                                             "town"=>$feature["properties"]["commune"],
                                             "size"=>$feature["properties"]["surface"],
-                                            "longitude" => $feature["geometry"]["coordinates"][0][0][0], 
+                                            "longitude" => $feature["geometry"]["coordinates"][0][0][0],
                                             "latitude" => $feature["geometry"]["coordinates"][0][0][1],
-                                            "monday" => $feature["properties"]["lundi"], 
-                                            "tuesday" => $feature["properties"]["mardi"], 
+                                            "monday" => $feature["properties"]["lundi"],
+                                            "tuesday" => $feature["properties"]["mardi"],
                                             "wednesday" => $feature["properties"]["mercredi"],
                                             "thursday" => $feature["properties"]["jeudi"],
                                             "friday" => $feature["properties"]["vendredi"],
@@ -104,7 +104,6 @@ class GeocodeController extends Controller
             }
         }
 
-        return $arrayTown;
+        return utf8_encode(json_encode($arrayTown));
     }
 }
-

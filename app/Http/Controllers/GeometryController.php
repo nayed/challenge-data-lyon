@@ -21,7 +21,7 @@ class GeometryController extends Controller
    */
   public function getTowns(Request $request, $town )
   {
-    
+
     // set url of data grand Lyon (en local)
     $json_url = "database/market.json";
 
@@ -41,7 +41,7 @@ class GeometryController extends Controller
 
 
     // populate the new array with values we need
-    foreach ($arrayFeatures as $feature) 
+    foreach ($arrayFeatures as $feature)
     {
       if(strtolower($town) === strtolower($feature["properties"]["commune"]))
       {
@@ -50,10 +50,10 @@ class GeometryController extends Controller
                                   "name"=>$feature["properties"]["nom"],
                                   "town"=>$feature["properties"]["commune"],
                                   "size"=>$feature["properties"]["surface"],
-                                  "longitude" => $feature["geometry"]["coordinates"][0][0][0], 
+                                  "longitude" => $feature["geometry"]["coordinates"][0][0][0],
                                   "latitude" => $feature["geometry"]["coordinates"][0][0][1],
-                                  "monday" => $feature["properties"]["lundi"], 
-                                  "tuesday" => $feature["properties"]["mardi"], 
+                                  "monday" => $feature["properties"]["lundi"],
+                                  "tuesday" => $feature["properties"]["mardi"],
                                   "wednesday" => $feature["properties"]["mercredi"],
                                   "thursday" => $feature["properties"]["jeudi"],
                                   "friday" => $feature["properties"]["vendredi"],
@@ -62,7 +62,7 @@ class GeometryController extends Controller
                                   )
         );
       }
-      
+
     }
 
     $type = "application/json";
@@ -96,7 +96,7 @@ class GeometryController extends Controller
     $arrayDays = array();
 
     // populate the new array with values we need
-    foreach ($arrayFeatures as $feature) 
+    foreach ($arrayFeatures as $feature)
     {
       for($i=0;$i<count($valeurs);$i++)
       {
@@ -107,10 +107,10 @@ class GeometryController extends Controller
                                     "name"=>$feature["properties"]["nom"],
                                     "town"=>$feature["properties"]["commune"],
                                     "size"=>$feature["properties"]["surface"],
-                                    "longitude" => $feature["geometry"]["coordinates"][0][0][0], 
+                                    "longitude" => $feature["geometry"]["coordinates"][0][0][0],
                                     "latitude" => $feature["geometry"]["coordinates"][0][0][1],
-                                    "monday" => $feature["properties"]["lundi"], 
-                                    "tuesday" => $feature["properties"]["mardi"], 
+                                    "monday" => $feature["properties"]["lundi"],
+                                    "tuesday" => $feature["properties"]["mardi"],
                                     "wednesday" => $feature["properties"]["mercredi"],
                                     "thursday" => $feature["properties"]["jeudi"],
                                     "friday" => $feature["properties"]["vendredi"],
@@ -119,7 +119,7 @@ class GeometryController extends Controller
                                     )
           );
         }
-      }   
+      }
     }
     $type = "application/json";
 

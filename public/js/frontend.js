@@ -1,15 +1,5 @@
 $(document).ready(function(){
-
-    /*$('.days__item').on('click', function(){
-        if($(this).attr('data-checked') == 'true'){
-            $(this).attr('data-checked', 'false');
-        } else {
-            $(this).attr('data-checked', 'true');
-        }
-    });*/
-
     // focus input
-
     $('.search__input').on('focusin', function(){
         $('.search__button').fadeIn();
     });
@@ -17,18 +7,18 @@ $(document).ready(function(){
     $('.search__input').on('focusout', function(){
         $('.search__button').fadeOut();
 
-        RecupChangementVille();
+        if ($("#ville").val != "") {
+            RecupChangementVille();
+        };
     });
 
 
     // close button in search input
-
     $('.search__button').on('click', function(){
         $('.search__input').val('');
     })
 
     // on enter key
-
     $('.search__input').keypress(function(e){
         if(e.which == 13){
             $(this).blur();
@@ -42,7 +32,6 @@ $(document).ready(function(){
         cache: false,
         dataType : 'json',
         success: function(data) {
-            console.log(data);
             var availableTags = data;
             $('.search__input').autocomplete({
                 minLength : 0,
@@ -55,13 +44,10 @@ $(document).ready(function(){
     });
 
     // popup
-
     $('.popup__close').on('click', function(){
         $('.popup').css('top', '100%');
         $('.popup__container').removeClass('popup__container--anim');
     })
-
-
 });
 
 
