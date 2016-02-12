@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>My Market</title>
+        <title>myMarket</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Situez les marchés alimentaires et mixtes les plus proches de vous grâce à myMarket">
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
         <link href="css/main.css" rel="stylesheet" type="text/css">
         <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>

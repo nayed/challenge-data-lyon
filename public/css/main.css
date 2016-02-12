@@ -345,3 +345,6 @@ body {
     background-color: #01654e; }
   100% {
     background-color: #4DAF7C; } }
+
+.ui-helper-hidden-accessible {
+  display: none !important; }
