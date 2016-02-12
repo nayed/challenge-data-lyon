@@ -433,6 +433,19 @@ var styles = [
                                 chaine = chaine + "<br/>Jeudi : "+ doc[i].thursday + "<br/>Vendredi : " + doc[i].friday 
                                 chaine = chaine + "<br/>Samedi : " + doc[i].saturday + "<br/>Dimanche : " + doc[i].sunday
 
+                                var pop_info = [
+                                    doc[i].name,
+                                    doc[i].size,
+                                    doc[i].monday,
+                                    doc[i].tuesday,
+                                    doc[i].wednesday,
+                                    doc[i].thursday,
+                                    doc[i].friday,
+                                    doc[i].saturday,
+                                    doc[i].sunday
+
+                                ]
+
                                 var myLatlng=new google.maps.LatLng(latitude, longitude);
                                 
                                 var infowindow = new google.maps.InfoWindow({
@@ -442,13 +455,43 @@ var styles = [
                                 marker = new google.maps.Marker({
                                     position: myLatlng,
                                     map: map,
-                                    info: chaine,
+                                    info: pop_info,
                                     animation: google.maps.Animation.DROP
                                   });
 
                                 google.maps.event.addListener(marker, 'click', function(){
-                                    infowindow.setContent(this.info);
-                                    infowindow.open(map,this);
+                                    //infowindow.setContent(this.info);
+                                    $('.popup').css('top', '0%');
+                                    $('.popup__container').addClass('popup__container--anim');
+                                    $('.popup__title').text(this.info[0]);
+                                    $('.popup__location').text(this.info[1]+' m²');
+
+                                    $('.popup__list__item').attr('data-checked', 'false');
+
+                                    if(this.info[2] != 'Non'){
+                                        $('.popup__list__item--lun').attr('data-checked', 'true');
+                                    };
+                                    if(this.info[3] != 'Non'){
+                                        $('.popup__list__item--mar').attr('data-checked', 'true');
+                                    };
+                                    if(this.info[4] != 'Non'){
+                                        $('.popup__list__item--mer').attr('data-checked', 'true');
+                                    };
+                                    if(this.info[5] != 'Non'){
+                                        $('.popup__list__item--jeu').attr('data-checked', 'true');
+                                    };
+                                    if(this.info[6] != 'Non'){
+                                        $('.popup__list__item--ven').attr('data-checked', 'true');
+                                    };
+                                    if(this.info[7] != 'Non'){
+                                        $('.popup__list__item--sam').attr('data-checked', 'true');
+                                    };
+                                    if(this.info[8] != 'Non'){
+                                        $('.popup__list__item--dim').attr('data-checked', 'true');
+                                    };
+
+
+                                    //infowindow.open(map,this);
                                 });
                                 
                             }

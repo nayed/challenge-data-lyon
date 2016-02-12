@@ -47,20 +47,20 @@
                 <li class="days__item" data-value="dimanche" id="jour_7" data-checked="false" onclick="RecupChangementJour(this.value)">Dim</li>
             </ul>
         </section>
-        <section class="popup" style="display:table;">
+        <section class="popup">
             <div class="popup__wrapper">
                 <div class="popup__container">
                     <i class="popup__icon fa fa-shopping-basket"></i>
                     <h1 class="popup__title">Place de l'Europe</h1>
                     <h2 class="popup__location">Francheville</h2>
                     <ul class="popup__list">
-                        <li class="popup__list__item" data-checked="true">lun</li>
-                        <li class="popup__list__item" data-checked="false">mar</li>
-                        <li class="popup__list__item" data-checked="true">mer</li>
-                        <li class="popup__list__item" data-checked="false">jeu</li>
-                        <li class="popup__list__item" data-checked="false">ven</li>
-                        <li class="popup__list__item" data-checked="false">sam</li>
-                        <li class="popup__list__item" data-checked="true">dim</li>
+                        <li class="popup__list__item popup__list__item--lun" data-checked="false">lun</li>
+                        <li class="popup__list__item popup__list__item--mar" data-checked="false">mar</li>
+                        <li class="popup__list__item popup__list__item--mer" data-checked="false">mer</li>
+                        <li class="popup__list__item popup__list__item--jeu" data-checked="false">jeu</li>
+                        <li class="popup__list__item popup__list__item--ven" data-checked="false">ven</li>
+                        <li class="popup__list__item popup__list__item--sam" data-checked="false">sam</li>
+                        <li class="popup__list__item popup__list__item--dim" data-checked="false">dim</li>
                     </ul>
                     <button class="popup__close"><i class="fa fa-times"></i>
                 </div>
