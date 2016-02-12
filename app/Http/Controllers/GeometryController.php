@@ -8,6 +8,10 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Javascript;
 
+
+/*
+ *@description: get market array values following json result from public/database/market.json
+*/
 class GeometryController extends Controller
 {
 
@@ -16,7 +20,7 @@ class GeometryController extends Controller
 
     CronController::updateJson($request);
     
-    // set url of data grand Lyon
+    // set url of data grand Lyon (en local)
     $json_url = "database/market.json";
 
     // get contents of file
@@ -30,12 +34,12 @@ class GeometryController extends Controller
 
 
     // define a new empty array
-    $arrayTown = array();
+    $arrayInit = array();
 
     // populate the new array with values we need
     foreach ($arrayFeatures as $feature) {
 
-      array_push($arrayTown, array("id" => $feature["properties"]["gid"],
+      array_push($arrayInit, array("id" => $feature["properties"]["gid"],
                                   "name"=>$feature["properties"]["nom"],
                                   "town"=>$feature["properties"]["commune"],
                                   "size"=>$feature["properties"]["surface"],
@@ -55,15 +59,18 @@ class GeometryController extends Controller
 
     $type = "application/json";
 
-    return response()->json($arrayTown)->header('Content-type', $type);
+    return response()->json($arrayInit)->header('Content-type', $type);
    
   }
 
+  /*
+   * @description: get all rows contain towns informations
+   * @return json array
+   */
   public function getTowns(Request $request, $town )
   {
     
-    //if($request->isXmlHttpRequest()) {
-    // set url of data grand Lyon
+    // set url of data grand Lyon (en local)
     $json_url = "database/market.json";
 
     // get contents of file
@@ -109,21 +116,18 @@ class GeometryController extends Controller
     $type = "application/json";
     return response()->json($arrayTown)->header('Content-type', $type);
 
-
-      //} else {
-      //    echo "no";
-      //}  
-
   }
 
+  /*
+   * @description: get all markets following days choices
+   * @return json array
+   */
   public function getDays(Request $request, $days )
   {
 
     $valeurs=explode(",",$days);
 
-   
-    //if($request->isXmlHttpRequest()) {
-    // set url of data grand Lyon
+    // set url of data grand Lyon (en local)
     $json_url = "database/market.json";
 
     // get contents of file
@@ -137,9 +141,7 @@ class GeometryController extends Controller
 
 
     // define a new empty array
-    $arrayTown = array();
-
-
+    $arrayDays = array();
 
     // populate the new array with values we need
     foreach ($arrayFeatures as $feature) 
@@ -149,7 +151,7 @@ class GeometryController extends Controller
         if(strtolower($feature["properties"][$valeurs[$i]] != "Non"))
         {
 
-          array_push($arrayTown, array("id" => $feature["properties"]["gid"],
+          array_push($arrayDays, array("id" => $feature["properties"]["gid"],
                                     "name"=>$feature["properties"]["nom"],
                                     "town"=>$feature["properties"]["commune"],
                                     "size"=>$feature["properties"]["surface"],
@@ -165,20 +167,10 @@ class GeometryController extends Controller
                                     )
           );
         }
-      }
-      
+      }   
     }
-
     $type = "application/json";
-    return response()->json($arrayTown)->header('Content-type', $type);
 
-
-      //} else {
-      //    echo "no";
-      //}  
-
+    return response()->json($arrayDays)->header('Content-type', $type);
   }
-
-
-
 }

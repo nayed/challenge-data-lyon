@@ -8,12 +8,17 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Javascript;
 
+/*
+ * @descrition: monthly update of public/database/market.json in order to be up-to-date
+ */
 class CronController extends Controller
 {
-
+	/*
+	 * @return json response 
+	 */
 	public static function updateJson(Request $request)
 	{
-
+		//définition du json header response
 		$type="application/json";
 		$charset="utf-8";
 		
@@ -44,6 +49,6 @@ class CronController extends Controller
 
 			$error = 'no need to update';
 			return response()->json($error)->header('Content-type', $type, 'charset', $charset);
-}
+		}
 	}
 }

@@ -8,8 +8,15 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Javascript;
 
+/*
+ *@description: create autocompletion for town choices following public/database/market.json
+*/
 class AutoCompleteController extends Controller
 {
+  /*
+   * @description: get town array with deleting duplicate entries
+   * @return json array
+   */
   public function getTownAutoComplete(Request $request)
   {
     if($request->isXmlHttpRequest()) {
