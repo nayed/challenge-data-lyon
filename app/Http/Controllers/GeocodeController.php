@@ -10,31 +10,33 @@ use \Geocode;
 use League\Geotools\Coordinate\Ellipsoid;
 use Toin0u\Geotools\Facade\Geotools;
 
+/*
+ *@description: get the nearest market to my location 1,5 km
+ */
 class GeocodeController extends Controller
 {
-    public function index()
+    /**
+     * @description: calcul distance and returns if there is a market near
+     * @return bool
+     */
+    function calculDistance($myLocation, $marketLocation)
     {
-        // $response = Geocode::make()->address('Villeurbanne, Charpennes');
-        // $arr = array();
-        // if ($response) {
-        //     $array['latitude'] = $response->latitude();
-        //     $array['long'] = $response->longitude();
-        //     $array['addr'] = $response->formattedAddress();
-        //     $array['location'] = $response->locationType();
-        // }
-        // return $array;
-        // dd(self::geo_ip());
-        // $coordA   = Geotools::coordinate([48.8234055, 2.3072664]);
-        // $coordB   = Geotools::coordinate([43.296482, 5.36978]);
-        // $distance = Geotools::distance()->setFrom($coordA)->setTo($coordB);
+        $coordA   = Geotools::coordinate([$myLocation->latitude, $myLocation->longitude]);
+        $coordB   = Geotools::coordinate([$marketLocation[1], $marketLocation[0]]);
+        $distance = Geotools::distance()->setFrom($coordA)->setTo($coordB);
 
-        // echo $distance->flat() . ' metres <br />'; // 659166.50038742 (meters)
-        // echo $distance->in('km')->haversine() . ' km <br />'; // 659.0219081284
-        $myLocation = self::geo_ip();
-        dd($myLocation);
-        //dd(self::getNearestLocation());
+        if ($distance->in('km')->haversine() < 1.5) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
+    /**
+     * @description: get ip and location of user
+     * @return json
+     */
     function geo_ip()
     {
         $ip  = !empty($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
@@ -53,11 +55,16 @@ class GeocodeController extends Controller
         } else {
             return false;
         }
-
     }
 
-    function getNearestLocation()
+    /**
+     * @description: get nearest market
+     * @return json
+     */
+    function getNearestMarket()
     {
+        $myLocation = self::geo_ip();
+
         $json_url = "https://download.data.grandlyon.com/wfs/grandlyon?SERVICE=WFS&VERSION=2.0.0&outputformat=GEOJSON&request=GetFeature&typename=gin_nettoiement.ginmarche&SRSNAME=urn:ogc:def:crs:EPSG::4171";
 
         $json = file_get_contents($json_url);
@@ -71,18 +78,33 @@ class GeocodeController extends Controller
         // define a new empty array
         $arrayTown = array();
 
+        $arr = array();
 
         // populate the new array with values we need
         foreach ($arrayFeatures as $feature) {
-            array_push($arrayTown, $feature["geometry"]["coordinates"][0]);
+            $market[1] = $feature["geometry"]["coordinates"][0][0][1];
+            $market[0] = $feature["geometry"]["coordinates"][0][0][0];
+            //dd($market);
+            if (self::calculDistance($myLocation, $market)) {
+                array_push($arrayTown, array("id" => $feature["properties"]["gid"],
+                                            "name"=>$feature["properties"]["nom"],
+                                            "town"=>$feature["properties"]["commune"],
+                                            "size"=>$feature["properties"]["surface"],
+                                            "longitude" => $feature["geometry"]["coordinates"][0][0][0], 
+                                            "latitude" => $feature["geometry"]["coordinates"][0][0][1],
+                                            "monday" => $feature["properties"]["lundi"], 
+                                            "tuesday" => $feature["properties"]["mardi"], 
+                                            "wednesday" => $feature["properties"]["mercredi"],
+                                            "thursday" => $feature["properties"]["jeudi"],
+                                            "friday" => $feature["properties"]["vendredi"],
+                                            "saturday" => $feature["properties"]["samedi"],
+                                            "sunday" => $feature["properties"]["dimanche"],
+                                            //$feature["geometry"]["coordinates"][0][0]
+                                            ));
+            }
         }
-       
-        // set charset
-        $charset = "UTF-8";
-        //set content type
-        $type = "application/json";
 
-        // the best return ever ;)
-        return response()->json($arrayTown)->header('Content-type', $type, 'charset', $charset);
+        return $arrayTown;
     }
 }
+

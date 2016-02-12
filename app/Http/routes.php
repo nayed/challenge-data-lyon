@@ -41,5 +41,5 @@ Route::get('/days/{days}', 'GeometryController@getDays');
 // get Towns data
 Route::get('/towns/{town}', 'GeometryController@getTowns');
 
-// test
-Route::get('/testGeo', 'GeocodeController@index');
+// get markets near
+Route::get('/market-near', 'GeocodeController@getNearestMarket');
