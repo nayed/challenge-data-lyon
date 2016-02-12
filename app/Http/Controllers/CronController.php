@@ -8,12 +8,12 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Javascript;
 
-/*
+/**
  * @descrition: monthly update of public/database/market.json in order to be up-to-date
  */
 class CronController extends Controller
 {
-	/*
+	/**
 	 * @return json response 
 	 */
 	public static function updateJson(Request $request)

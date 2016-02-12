@@ -9,61 +9,13 @@ use App\Http\Controllers\Controller;
 use Javascript;
 
 
-/*
- *@description: get market array values following json result from public/database/market.json
-*/
+/**
+ * @description: get market array values following json result from public/database/market.json
+ */
 class GeometryController extends Controller
 {
 
-  public function getValues(Request $request)
-  {
-
-    CronController::updateJson($request);
-    
-    // set url of data grand Lyon (en local)
-    $json_url = "database/market.json";
-
-    // get contents of file
-    $json = file_get_contents($json_url);
-
-    // decode json datas
-    $datas = json_decode($json, TRUE);
-
-    // get the multi json array
-    $arrayFeatures = $datas["features"];
-
-
-    // define a new empty array
-    $arrayInit = array();
-
-    // populate the new array with values we need
-    foreach ($arrayFeatures as $feature) {
-
-      array_push($arrayInit, array("id" => $feature["properties"]["gid"],
-                                  "name"=>$feature["properties"]["nom"],
-                                  "town"=>$feature["properties"]["commune"],
-                                  "size"=>$feature["properties"]["surface"],
-                                  "longitude" => $feature["geometry"]["coordinates"][0][0][0], 
-                                  "latitude" => $feature["geometry"]["coordinates"][0][0][1],
-                                  "monday" => $feature["properties"]["lundi"], 
-                                  "tuesday" => $feature["properties"]["mardi"], 
-                                  "wednesday" => $feature["properties"]["mercredi"],
-                                  "thursday" => $feature["properties"]["jeudi"],
-                                  "friday" => $feature["properties"]["vendredi"],
-                                  "saturday" => $feature["properties"]["samedi"],
-                                  "sunday" => $feature["properties"]["dimanche"],
-                                    )
-        );
-
-    }
-
-    $type = "application/json";
-
-    return response()->json($arrayInit)->header('Content-type', $type);
-   
-  }
-
-  /*
+  /**
    * @description: get all rows contain towns informations
    * @return json array
    */
@@ -118,7 +70,7 @@ class GeometryController extends Controller
 
   }
 
-  /*
+  /**
    * @description: get all markets following days choices
    * @return json array
    */

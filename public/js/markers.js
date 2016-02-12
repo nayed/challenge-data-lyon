@@ -468,7 +468,7 @@ var styles = [
             }
 
             var req = new XMLHttpRequest();
-            req.open("GET", "/init", true); 
+            req.open("GET", "/market-near", true); 
             req.onreadystatechange = lectureFichier;  
             req.send(null); 
 
