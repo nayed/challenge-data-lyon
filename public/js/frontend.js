@@ -57,7 +57,8 @@ $(document).ready(function(){
     // popup
 
     $('.popup__close').on('click', function(){
-        $('.popup').css('display', 'none');
+        $('.popup').css('top', '100%');
+        $('.popup__container').removeClass('popup__container--anim');
     })
 
 
