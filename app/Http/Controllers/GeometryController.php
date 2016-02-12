@@ -13,53 +13,49 @@ class GeometryController extends Controller
 
   public function getValues(Request $request)
   {
+
+    CronController::updateJson($request);
     
- // if($request->isXmlHttpRequest()) {
-      // set url of data grand Lyon
-      $json_url = "https://download.data.grandlyon.com/wfs/grandlyon?SERVICE=WFS&VERSION=2.0.0&outputformat=GEOJSON&request=GetFeature&typename=gin_nettoiement.ginmarche&SRSNAME=urn:ogc:def:crs:EPSG::4171";
+    // set url of data grand Lyon
+    $json_url = "database/market.json";
 
-      // get contents of file
-      $json = file_get_contents($json_url);
+    // get contents of file
+    $json = file_get_contents($json_url);
 
-      // decode json datas
-      $datas = json_decode($json, TRUE);
+    // decode json datas
+    $datas = json_decode($json, TRUE);
 
-      // get the multi json array
-      $arrayFeatures = $datas["features"];
-
-
-      // define a new empty array
-      $arrayTown = array();
-
-      // populate the new array with values we need
-      foreach ($arrayFeatures as $feature) {
-
-        array_push($arrayTown, array("id" => $feature["properties"]["gid"],
-                                    "name"=>$feature["properties"]["nom"],
-                                    "town"=>$feature["properties"]["commune"],
-                                    "size"=>$feature["properties"]["surface"],
-                                    "longitude" => $feature["geometry"]["coordinates"][0][0][0], 
-                                    "latitude" => $feature["geometry"]["coordinates"][0][0][1],
-                                    "monday" => $feature["properties"]["lundi"], 
-                                    "tuesday" => $feature["properties"]["mardi"], 
-                                    "wednesday" => $feature["properties"]["mercredi"],
-                                    "thursday" => $feature["properties"]["jeudi"],
-                                    "friday" => $feature["properties"]["vendredi"],
-                                    "saturday" => $feature["properties"]["samedi"],
-                                    "sunday" => $feature["properties"]["dimanche"],
-                                      )
-          );
-
-      }
-
-      $type = "application/json";
-      return response()->json($arrayTown)->header('Content-type', $type);
+    // get the multi json array
+    $arrayFeatures = $datas["features"];
 
 
- //       } else {
- //           echo "Vous ne pouvez pas accéder au fichier par l'URL.";        
- //       }    
+    // define a new empty array
+    $arrayTown = array();
 
+    // populate the new array with values we need
+    foreach ($arrayFeatures as $feature) {
+
+      array_push($arrayTown, array("id" => $feature["properties"]["gid"],
+                                  "name"=>$feature["properties"]["nom"],
+                                  "town"=>$feature["properties"]["commune"],
+                                  "size"=>$feature["properties"]["surface"],
+                                  "longitude" => $feature["geometry"]["coordinates"][0][0][0], 
+                                  "latitude" => $feature["geometry"]["coordinates"][0][0][1],
+                                  "monday" => $feature["properties"]["lundi"], 
+                                  "tuesday" => $feature["properties"]["mardi"], 
+                                  "wednesday" => $feature["properties"]["mercredi"],
+                                  "thursday" => $feature["properties"]["jeudi"],
+                                  "friday" => $feature["properties"]["vendredi"],
+                                  "saturday" => $feature["properties"]["samedi"],
+                                  "sunday" => $feature["properties"]["dimanche"],
+                                    )
+        );
+
+    }
+
+    $type = "application/json";
+
+    return response()->json($arrayTown)->header('Content-type', $type);
    
   }
 
@@ -68,7 +64,7 @@ class GeometryController extends Controller
     
     //if($request->isXmlHttpRequest()) {
     // set url of data grand Lyon
-    $json_url = "https://download.data.grandlyon.com/wfs/grandlyon?SERVICE=WFS&VERSION=2.0.0&outputformat=GEOJSON&request=GetFeature&typename=gin_nettoiement.ginmarche&SRSNAME=urn:ogc:def:crs:EPSG::4171";
+    $json_url = "database/market.json";
 
     // get contents of file
     $json = file_get_contents($json_url);
@@ -128,7 +124,7 @@ class GeometryController extends Controller
    
     //if($request->isXmlHttpRequest()) {
     // set url of data grand Lyon
-    $json_url = "https://download.data.grandlyon.com/wfs/grandlyon?SERVICE=WFS&VERSION=2.0.0&outputformat=GEOJSON&request=GetFeature&typename=gin_nettoiement.ginmarche&SRSNAME=urn:ogc:def:crs:EPSG::4171";
+    $json_url = "database/market.json";
 
     // get contents of file
     $json = file_get_contents($json_url);

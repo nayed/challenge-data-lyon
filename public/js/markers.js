@@ -1,5 +1,3 @@
-
-
 var styles = [
             {
                 "featureType": "water",
@@ -195,19 +193,20 @@ var styles = [
 
         function RecupChangementJour(jour){
                 
-                //document.getElementById("ville").innerHTML="";
-                
-                var jours;
-                jours = new Array();
 
-                if(document.getElementById('jour_'+jour).getAttribute("data-checked") == "true")
+                document.getElementById("ville").value="";
+
+                if(document.getElementById("jour_"+jour).getAttribute("data-checked") == "true")
                 {
-                    document.getElementById('jour_'+jour).getAttribute("data-checked") = "false";
+                    document.getElementById("jour_"+jour).setAttribute("data-checked",false);
                 }
                 else
                 {
-                    document.getElementById('jour_'+jour).getAttribute("data-checked") = "true";
+                    document.getElementById("jour_"+jour).setAttribute("data-checked",true);
                 }
+                
+                var jours;
+                jours = new Array();
 
 
                 for(i=1;i<=7;i++)
@@ -236,7 +235,7 @@ var styles = [
 
                 var myOptions = {
                     center: new google.maps.LatLng(45.750000,4.850000),
-                    zoom: 11,
+                    zoom: 13,
                     styles:styles,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
@@ -316,15 +315,24 @@ var styles = [
             }
 
 
-            function RecupChangementVille(ville){
+            function RecupChangementVille(){
 
+                ville = document.getElementById("ville").value;
+
+                for(i=1;i<=7;i++)
+                {
+                    if(document.getElementById('jour_'+i).getAttribute("data-checked") == "true")
+                    {
+                        document.getElementById("jour_"+i).setAttribute("data-checked",false);
+                    }
+                }
 
                 console.log(ville);
 
 
                 var myOptions = {
                     center: new google.maps.LatLng(45.750000,4.850000),
-                    zoom: 11,
+                    zoom: 13,
                     styles:styles,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
@@ -408,7 +416,7 @@ var styles = [
 
                 var myOptions = {
                     center: new google.maps.LatLng(45.750000,4.850000),
-                    zoom: 11,
+                    zoom: 13,
                     styles:styles,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
