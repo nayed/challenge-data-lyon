@@ -15,20 +15,18 @@ use App\Http\Requests;
 |
 */
 
+// Index page
 Route::get('/', function () {
     return view('welcome');
 });
 
-// create auto-completion
+// Create auto-completion
 Route::get('/autocomplete', function () {
     return view('autocomplete');
 });
 
 // get Towns data
 Route::get('/autocomplete/town', 'AutoCompleteController@getTownAutoComplete');
-
-// get Init (initialisation de la map)
-Route::get('/init/', 'GeometryController@getValues');
 
 // get Values 
 Route::get('/days/{days}', 'GeometryController@getDays');
@@ -39,5 +37,5 @@ Route::get('/towns/{town}', 'GeometryController@getTowns');
 // get markets near
 Route::get('/market-near', 'GeocodeController@getNearestMarket');
 
-//Cron
+// Cron
 Route::get('/cron', 'CronController@updateJson');

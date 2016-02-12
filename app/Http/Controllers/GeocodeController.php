@@ -10,7 +10,7 @@ use \Geocode;
 use League\Geotools\Coordinate\Ellipsoid;
 use Toin0u\Geotools\Facade\Geotools;
 
-/*
+/**
  *@description: get the nearest market to my location 1,5 km
  */
 class GeocodeController extends Controller
@@ -40,7 +40,7 @@ class GeocodeController extends Controller
     function geo_ip()
     {
         $ip  = !empty($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
-        $ip = '109.190.123.248';
+        //$ip = '109.190.123.248'; //Set an ip to test
         $url = "http://freegeoip.net/json/{$ip}";
         $ch  = curl_init();
         
@@ -65,7 +65,7 @@ class GeocodeController extends Controller
     {
         $myLocation = self::geo_ip();
 
-        $json_url = "https://download.data.grandlyon.com/wfs/grandlyon?SERVICE=WFS&VERSION=2.0.0&outputformat=GEOJSON&request=GetFeature&typename=gin_nettoiement.ginmarche&SRSNAME=urn:ogc:def:crs:EPSG::4171";
+        $json_url = "database/market.json";
 
         $json = file_get_contents($json_url);
 
