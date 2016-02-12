@@ -15,16 +15,12 @@ use App\Http\Requests;
 |
 */
 
+// Index page
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/recherche', 'RechercheController@index');
-
-Route::post('/recherche/rechercher', 'RechercheController@rechercher');
-//Route::post('/recherche/rechercher', ['uses' => 'RechercheController@rechercher', 'as' => 'home']);
-
-// create auto-completion
+// Create auto-completion
 Route::get('/autocomplete', function () {
     return view('autocomplete');
 });
@@ -32,19 +28,14 @@ Route::get('/autocomplete', function () {
 // get Towns data
 Route::get('/autocomplete/town', 'AutoCompleteController@getTownAutoComplete');
 
-// get Init (initialisation de la map)
-Route::get('/init/', 'GeometryController@getValues');
-
-
 // get Values 
 Route::get('/days/{days}', 'GeometryController@getDays');
-
 
 // get Towns data
 Route::get('/towns/{town}', 'GeometryController@getTowns');
 
-// test
-Route::get('/testGeo', 'GeocodeController@index');
+// get markets near
+Route::get('/market-near', 'GeocodeController@getNearestMarket');
 
-//Cron
+// Cron
 Route::get('/cron', 'CronController@updateJson');
