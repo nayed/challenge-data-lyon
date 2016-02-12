@@ -14,7 +14,7 @@ class AutoCompleteController extends Controller
   {
     if($request->isXmlHttpRequest()) {
       // set url of data grand Lyon
-      $json_url = "https://download.data.grandlyon.com/wfs/grandlyon?SERVICE=WFS&VERSION=2.0.0&outputformat=GEOJSON&request=GetFeature&typename=gin_nettoiement.ginmarche&SRSNAME=urn:ogc:def:crs:EPSG::4171";
+      $json_url = "database/market.json";
 
       // get contents of file
       $json = file_get_contents($json_url);

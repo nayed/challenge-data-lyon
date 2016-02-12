@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Response;
+use Illuminate\Http\Request;
+use App\Http\Requests;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,3 +45,6 @@ Route::get('/towns/{town}', 'GeometryController@getTowns');
 
 // test
 Route::get('/testGeo', 'GeocodeController@index');
+
+//Cron
+Route::get('/cron', 'CronController@updateJson');
